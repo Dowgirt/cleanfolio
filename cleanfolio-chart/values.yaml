@@ -1,0 +1,30 @@
+namespace: cleanfolio-ns
+
+image:
+  repository: martinklapacz/cleanfolio
+  tag: latest
+  pullPolicy: Always
+
+replicaCount: 3
+
+resources:
+  requests:
+    cpu: "250m"
+    memory: "512Mi"
+  limits:
+    cpu: "1000m"
+    memory: "1Gi"
+
+service:
+  name: cleanfolio-svc
+  type: LoadBalancer
+  port: 80
+  targetPort: 3000
+
+ingress:
+  enabled: true
+  className: nginx
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/rewrite-target: /
+  path: /
