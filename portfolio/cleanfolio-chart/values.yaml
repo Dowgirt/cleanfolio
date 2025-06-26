@@ -10,7 +10,7 @@ replicaCount: 3
 
 resources:
   requests:
-    cpu: "250m"
+    cpu: "255m"
     memory: "512Mi"
   limits:
     cpu: "1000m"
