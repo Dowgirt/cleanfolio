@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cleanfolio
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/Dowgirt/cleanfolio.git
+    targetRevision: HEAD
+    path: portfolio/cleanfolio-chart
+    helm:
+      valueFiles:
+        - values.yaml     # wskazuje plik values w folderze chart
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: cleanfolio-ns
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
